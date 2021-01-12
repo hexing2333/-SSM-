@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.liaocheng.archives.Dao.TeacherInfoDao">
+    <!--    根据ID查询教师密码-->
+    <select id="queryTeacherByID" resultType="com.liaocheng.archives.Po.TeacherInfo" parameterType="int">
+        select *from teacherinfo where tID=#{tID}
+    </select>
+</mapper>

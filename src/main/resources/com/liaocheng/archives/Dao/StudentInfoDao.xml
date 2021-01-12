@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.liaocheng.archives.Dao.StudentInfoDao">
+<!--    查询所有学生信息-->
+    <select id="queryStudentAll" resultType="com.liaocheng.archives.Po.StudentInfo">
+        select *from studentinfo
+    </select>
+
+<!--    添加学生信息-->
+    <insert id="addStudent" parameterType="com.liaocheng.archives.Po.StudentInfo">
+        insert into studentinfo(sName,sSex,sAge,sTime,sPassword)values(#{sName},#{sSex},#{sAge},#{sTime},#{sPassword})
+    </insert>
+
+<!--    根据ID查询学生信息-->
+    <select id="queryStudentByID" resultType="com.liaocheng.archives.Po.StudentInfo" parameterType="int">
+        select *from studentinfo where sID=#{sID}
+    </select>
+
+<!--修改学生信息    -->
+    <update id="updateStudentInfo" parameterType="com.liaocheng.archives.Po.StudentInfo">
+        update studentinfo set sName=#{sName},sSex=#{sSex},sAge=#{sAge},sTime=#{sTime} where sID=#{sID}
+    </update>
+<!--    删除学生信息-->
+    <delete id="deleteStudentByID" parameterType="int">
+        delete from studentinfo where sID=#{sID}
+    </delete>
+</mapper>

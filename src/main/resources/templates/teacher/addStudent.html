@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>添加学生信息</title>
+</head>
+<body>
+<div class="layuimini-main">
+    <div class="layui-form layuimini-form">
+        <div class="layui-form-item">
+            <label class="layui-form-label required">姓名</label>
+            <div class="layui-input-block">
+                <input type="text" name="sName" lay-verify="required" lay-reqtext="姓名不能为空" placeholder="请输入姓名" value="" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label required">性别</label>
+            <div class="layui-input-block">
+                <input type="radio" name="sSex" value="男" title="男" checked="">
+                <input type="radio" name="sSex" value="女" title="女">
+            </div>
+        </div>
+        <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label" required>年龄</label>
+            <div class="layui-input-block">
+                <input type="text" name="sAge" lay-verify="required" lay-reqtext="年龄不能为空" placeholder="请输入年龄" value="" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item layui-form-text" style="display: none">
+            <div class="layui-input-block">
+                <input type="text" name="sPassword" lay-verify="required"  value="123456" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn layui-btn-normal" lay-submit lay-filter="saveBtn">确认保存</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    layui.use(['form', 'table'], function () {
+        var form = layui.form,
+            layer = layui.layer,
+            table = layui.table,
+            $ = layui.$;
+
+        /**
+         * 初始化表单，要加上，不然刷新部分组件可能会不加载
+         */
+        form.render();
+
+        // 当前弹出层，防止ID被覆盖
+        var parentIndex = layer.index;
+
+
+        //监听提交
+        form.on('submit(saveBtn)', function (data) {
+            var datas=data.field;
+            datas.sAge=parseInt(datas.sAge);
+            $.ajax({
+                url:"student/addStudent",
+                type:"POST",
+                data:datas,
+                success:function (result){
+                    if (result.code==200){
+                        layer.msg("添加成功",{
+                            icon:6,
+                            time:500
+                        },function (){
+                            parent.window.location.reload();
+                            layer.close(index);
+                            layer.close(parentIndex);
+                        });
+                    }else {layer.msg("添加失败");}
+                }
+            })
+
+
+
+        });
+
+    });
+</script>
+</html>
