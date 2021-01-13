@@ -48,7 +48,11 @@
         <table class="layui-hide" id="currentTableId" lay-filter="currentTableFilter"></table>
 
         <script type="text/html" id="currentTableBar">
-            <a class="layui-btn layui-btn-normal layui-btn-xs data-count-edit" lay-event="edit">编辑</a>
+            <a class="layui-btn layui-btn-warm layui-btn-xs data-count-edit" lay-event="study">学习档案</a>
+            <a class="layui-btn layui-btn-xs data-count-edit" lay-event="sport">运动档案</a>
+            <a class="layui-btn layui-btn-normal layui-btn-xs data-count-edit" lay-event="practice">实践档案</a>
+            <a class="layui-btn layui-btn-primary layui-btn-xs data-count-edit" lay-event="health">健康档案</a>
+            <a class="layui-btn layui-btn-danger layui-btn-xs data-count-edit" lay-event="edit">编辑</a>
             <a class="layui-btn layui-btn-xs layui-btn-danger data-count-delete" lay-event="delete">删除</a>
         </script>
 
@@ -71,7 +75,7 @@
             }],
             cols: [[
                 {type: "checkbox", width: 50},
-                {field: 'sid', width: 80, title: '学号', sort: true},
+                {field: 'sid', width: 150, title: '学号', sort: true},
                 {field: 'sname', width: 80, title: '姓名'},
                 {field: 'ssex', width: 80, title: '性别', sort: true},
                 {field: 'sage', width: 120, title: '年龄',minWidth: 40},
@@ -137,7 +141,23 @@
 
         table.on('tool(currentTableFilter)', function (obj) {
             var data = obj.data;
-            if (obj.event === 'edit') {
+            if(obj.event === 'study'){
+                var content = miniPage.getHrefContent('studyShow?sid='+data.sid);
+                layer.open({
+                    title: '学习档案',
+                    type: 1,
+                    shade: 0.2,
+                    maxmin:true,
+                    shadeClose: true,
+                    area: ['80%','80%'],
+                    content:content
+                });
+                $(window).on("resize", function () {
+                    layer.full(index);
+                });
+                return false;
+
+            }else if (obj.event === 'edit') {
                 var content = miniPage.getHrefContent('updateStudent?id='+data.sid+'&name='+data.sname+'&age='+data.sage+'&sex='+data.ssex);
                 var index = layer.open({
                     title: '编辑学生',

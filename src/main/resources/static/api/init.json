@@ -50,19 +50,19 @@
         },
         {
           "title": "学习档案",
-          "href": "page/study.html",
+          "href": "teacher/study.html",
           "icon": "fa fa-window-maximize",
           "target": "_self"
         },
         {
           "title": "运动档案",
-          "href": "page/sports.html",
+          "href": "teacher/sports.html",
           "icon": "fa fa-window-maximize",
           "target": "_self"
         },
         {
           "title": "实践档案",
-          "href": "page/practice.html",
+          "href": "teacher/practice.html",
           "icon": "fa fa-window-maximize",
           "target": "_self"
         },
