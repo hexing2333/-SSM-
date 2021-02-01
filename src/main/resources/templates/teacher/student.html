@@ -151,7 +151,24 @@
                 });
                 return false;
 
-            }else if (obj.event === 'edit') {
+            }else if(obj.event === 'sport'){
+                var content = miniPage.getHrefContent('sportShow?sid='+data.sid+'&sname='+data.sname);
+                layer.open({
+                    title: '运动档案',
+                    type: 1,
+                    shade: 0.2,
+                    maxmin:true,
+                    shadeClose: true,
+                    area: ['80%','80%'],
+                    content:content
+                });
+                $(window).on("resize", function () {
+                    layer.full(index);
+                });
+                return false;
+
+            }
+            else if (obj.event === 'edit') {
                 var content = miniPage.getHrefContent('updateStudent?id='+data.sid+'&name='+data.sname+'&age='+data.sage+'&sex='+data.ssex);
                 var index = layer.open({
                     title: '编辑学生',
