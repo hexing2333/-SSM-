@@ -24,7 +24,7 @@ public class IndexController {
     public String IndexXS(Model model, HttpServletRequest request, HttpServletResponse resp){
         HttpSession session=request.getSession();
         String isLogin=(String)session.getAttribute("isLogin");
-        String username=(String)session.getAttribute("username");
+        String username=(String)session.getAttribute("sName");
         model.addAttribute("isLogin",isLogin);
         model.addAttribute("username",username);
         return "student/indexXS";

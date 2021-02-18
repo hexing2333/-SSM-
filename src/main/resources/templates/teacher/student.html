@@ -7,21 +7,37 @@
                 <form class="layui-form layui-form-pane" action="">
                     <div class="layui-form-item">
                         <div class="layui-inline">
-                            <label class="layui-form-label">学生姓名</label>
+                            <label class="layui-form-label">性别</label>
                             <div class="layui-input-inline">
-                                <input type="text" name="username" autocomplete="off" class="layui-input">
+                                <select name="sex" lay-search="">
+                                    <option value="">直接选择或搜索选择</option>
+                                    <option value="男">男</option>
+                                    <option value="女">女</option>
+                                </select>
                             </div>
                         </div>
                         <div class="layui-inline">
-                            <label class="layui-form-label">学生性别</label>
+                            <label class="layui-form-label">年龄</label>
                             <div class="layui-input-inline">
-                                <input type="text" name="sex" autocomplete="off" class="layui-input">
-                            </div>
-                        </div>
-                        <div class="layui-inline">
-                            <label class="layui-form-label">学号</label>
-                            <div class="layui-input-inline">
-                                <input type="text" name="classify" autocomplete="off" class="layui-input">
+                                <select name="age" lay-search="">
+                                    <option value="">直接选择或搜索选择</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                    <option value="13">13</option>
+                                    <option value="14">14</option>
+                                    <option value="15">15</option>
+                                    <option value="16">16</option>
+                                    <option value="17">17</option>
+                                    <option value="18">18</option>
+                                    <option value="19">19</option>
+                                    <option value="20">20</option>
+                                    <option value="21">21</option>
+                                </select>
                             </div>
                         </div>
                         <div class="layui-inline">
@@ -46,7 +62,8 @@
             <a class="layui-btn layui-btn-xs data-count-edit" lay-event="sport">运动档案</a>
             <a class="layui-btn layui-btn-normal layui-btn-xs data-count-edit" lay-event="practice">实践档案</a>
             <a class="layui-btn layui-btn-primary layui-btn-xs data-count-edit" lay-event="health">健康档案</a>
-            <a class="layui-btn layui-btn-danger layui-btn-xs data-count-edit" lay-event="edit">编辑</a>
+            <a class="layui-btn layui-bg-black layui-btn-xs data-count-edit" lay-event="evaluation">综合评价</a>
+            <a class="layui-btn layui-btn-danger layui-btn-xs data-count-edit" lay-event="edit" style="margin-left: 3%">编辑</a>
             <a class="layui-btn layui-btn-xs layui-btn-danger data-count-delete" lay-event="delete">删除</a>
         </script>
 
@@ -58,6 +75,7 @@
             form = layui.form,
             table = layui.table,
             miniPage = layui.miniPage;
+        form.render();
         table.render({
             elem: '#currentTableId',
             url: 'student/studentInfo',
@@ -85,17 +103,14 @@
         // 监听搜索操作
         form.on('submit(data-search-btn)', function (data) {
             var result = JSON.stringify(data.field);
-            layer.alert(result, {
-                title: '最终的搜索信息'
-            });
-
             //执行搜索重载
             table.reload('currentTableId', {
                 page: {
                     curr: 1
                 }
                 , where: {
-                    searchParams: result
+                    sex: data.field.sex,
+                    age: data.field.age
                 }
             }, 'data');
 
@@ -155,6 +170,54 @@
                 var content = miniPage.getHrefContent('sportShow?sid='+data.sid+'&sname='+data.sname);
                 layer.open({
                     title: '运动档案',
+                    type: 1,
+                    shade: 0.2,
+                    maxmin:true,
+                    shadeClose: true,
+                    area: ['80%','80%'],
+                    content:content
+                });
+                $(window).on("resize", function () {
+                    layer.full(index);
+                });
+                return false;
+
+            }else if(obj.event === 'practice'){
+                var content = miniPage.getHrefContent('practiceShow?sid='+data.sid+'&sname='+data.sname);
+                layer.open({
+                    title: '实践档案',
+                    type: 1,
+                    shade: 0.2,
+                    maxmin:true,
+                    shadeClose: true,
+                    area: ['80%','80%'],
+                    content:content
+                });
+                $(window).on("resize", function () {
+                    layer.full(index);
+                });
+                return false;
+
+            }else if(obj.event === 'health'){
+                var content = miniPage.getHrefContent('healthShow?sid='+data.sid+'&sname='+data.sname);
+                layer.open({
+                    title: '健康档案',
+                    type: 1,
+                    shade: 0.2,
+                    maxmin:true,
+                    shadeClose: true,
+                    area: ['80%','80%'],
+                    content:content
+                });
+                $(window).on("resize", function () {
+                    layer.full(index);
+                });
+                return false;
+
+            }else if(obj.event === 'evaluation'){
+                var content = miniPage.getHrefContent('evaluationShow?sid='+data.sid+'&sname='+data.sname);
+                layer.open({
+                    title: '综合评价',
                     type: 1,
                     shade: 0.2,
                     maxmin:true,

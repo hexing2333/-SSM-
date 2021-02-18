@@ -1,7 +1,7 @@
 {
   "homeInfo": {
     "title": "首页",
-    "href": "page/welcome-1.html?t=1"
+    "href": "page/welcome-2.html?t=1"
   },
   "logoInfo": {
     "title": "成长档案系统",
@@ -16,52 +16,40 @@
       "target": "_self",
       "child": [
         {
-          "title": "主页模板",
+          "title": "档案管理",
           "href": "",
           "icon": "fa fa-home",
           "target": "_self",
           "child": [
             {
-              "title": "主页一",
-              "href": "page/welcome-1.html",
-              "icon": "fa fa-tachometer",
+              "title": "学习档案",
+              "href": "studentStudyShow",
+              "icon": "fa fa-window-maximize",
               "target": "_self"
             },
             {
-              "title": "主页二",
-              "href": "page/welcome-2.html",
-              "icon": "fa fa-tachometer",
+              "title": "运动档案",
+              "href": "studentSportShow",
+              "icon": "fa fa-window-maximize",
               "target": "_self"
             },
             {
-              "title": "主页三",
-              "href": "page/welcome-3.html",
-              "icon": "fa fa-tachometer",
+              "title": "实践档案",
+              "href": "studentPracticeShow",
+              "icon": "fa fa-window-maximize",
+              "target": "_self"
+            },
+            {
+              "title": "健康档案",
+              "href": "studentHealthShow",
+              "icon": "fa fa-window-maximize",
               "target": "_self"
             }
           ]
         },
         {
-          "title": "学习档案",
-          "href": "page/study.html",
-          "icon": "fa fa-window-maximize",
-          "target": "_self"
-        },
-        {
-          "title": "运动档案",
-          "href": "page/sports.html",
-          "icon": "fa fa-window-maximize",
-          "target": "_self"
-        },
-        {
-          "title": "实践档案",
-          "href": "page/practice.html",
-          "icon": "fa fa-window-maximize",
-          "target": "_self"
-        },
-        {
-          "title": "健康档案",
-          "href": "page/health.html",
+          "title": "综合评价",
+          "href": "studentEvaluationShow",
           "icon": "fa fa-window-maximize",
           "target": "_self"
         }

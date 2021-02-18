@@ -18,29 +18,28 @@ public class LoginController {
     @Autowired
     private StudentInfoService studentInfoService;
 
-    @GetMapping("/jslogin")
-    public String jsLogin(){
-        return "loginJS";
+    @GetMapping("/")
+    public String Login(){
+        return "login";
     }
     @PostMapping("/jslogin")
     @ResponseBody
     public R postjsLogin(HttpServletRequest request,
-                         @RequestParam("tID") Integer tID,
+                         @RequestParam("sID") Integer tID,
                          @RequestParam("password") String password){
         TeacherInfo teacher = teacherInfoService.queryTeacherByID(tID);
-        if (teacher.getTPassword().equals(password)){
-            System.out.println("success");
-            request.getSession().setAttribute("isLogin","1");
-            request.getSession().setAttribute("username",teacher.getTName());
-            return R.ok();
+        if(teacher==null){
+            return R.fail("用户名不存在");
         }else {
-            return R.fail("密码错误或用户名不存在");
+            if (teacher.getTPassword().equals(password)){
+                System.out.println("success");
+                request.getSession().setAttribute("isLogin","1");
+                request.getSession().setAttribute("username",teacher.getTName());
+                return R.ok();
+            }else {
+                return R.fail("密码错误或用户名不存在");
+            }
         }
-    }
-
-    @GetMapping("/xslogin")
-    public String xsLogin(){
-        return "loginXS";
     }
     @PostMapping("/xslogin")
     @ResponseBody
@@ -48,14 +47,20 @@ public class LoginController {
                          @RequestParam("sID") Integer sID,
                          @RequestParam("password") String password){
         StudentInfo student = studentInfoService.queryStudentByID(sID);
-        if (student.getSPassword().equals(password)){
-            System.out.println("success");
-            request.getSession().setAttribute("isLogin","1");
-            request.getSession().setAttribute("username",student.getSName());
-            return R.ok();
+        if(student==null){
+            return R.fail("用户名不存在");
         }else {
-            return R.fail("密码错误或用户名不存在");
+            if (student.getSPassword().equals(password)){
+                System.out.println("success");
+                request.getSession().setAttribute("isLogin","1");
+                request.getSession().setAttribute("sName",student.getSName());
+                request.getSession().setAttribute("sID",sID);
+                return R.ok();
+            }else {
+                return R.fail("密码错误或用户名不存在");
+            }
         }
+
     }
 
 }
